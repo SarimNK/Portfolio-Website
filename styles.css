@@ -1,0 +1,197 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans',sans-serif;
+    box-sizing: border-box;
+}
+body{
+    background: #151516;
+    color: #fff;
+}
+#header {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('images/Background Wide.jpg');
+    background-size: cover;
+    background-position: left;
+}
+.container{
+    margin-left: 220px;
+    padding: 10px 10%;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.logo{
+    width: 140px;
+    animation: fadeIn 1s ease-in-out; /*Apply fade to logo */
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+
+nav ul li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+}
+
+nav ul li a::after{
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #00ffff;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+
+/* Creating hover website effect for menu */
+nav ul li a:hover::after{  
+    width: 100%;
+}    
+.header-text{
+    margin-top: 20%;
+    font-size: 30px;
+}
+
+.header-text h1{
+    font-family:'Poppins', sans-serif;
+    font-size: 80px;
+    margin-top: 20px;
+}
+.header-text p{
+    font-family: 'Michroma', sans-serif;
+}
+.header-text h1 span{
+    color: #00ffff;
+}
+
+/*-------------about---------------*/
+
+.about-col1,
+.about-col2 {
+    flex: 1; /* Makes both columns take equal width */
+    padding: 20px;
+    font-size:  30px;
+}
+
+/* Experience Section */
+#experience-section {
+    padding-top: 50px;
+    border-top: 2px solid #333;
+    display: flex;
+}
+
+.sidebar{
+    width: 200px;
+    position: sticky;
+    top: 0;
+    border-right: 1px solid #ababab;
+    padding: 10px 40px;
+    
+    white-space: nowrap;
+}
+
+
+.experience-content{
+    position: relative;
+    margin-left: 220px;
+    width: calc(100%-220px);
+    min-height: 600px;
+}
+
+.sidebar a{
+    display: block;
+    padding: 10px 20px;
+    color: #ababab;
+    text-decoration: none;
+    transition: color 0.3s;
+    text-overflow: ellipsis;
+    
+}
+
+.sidebar a:hover{
+    color: #00ffff;
+}
+
+.experience-item {
+    display: none;
+    margin-bottom: 40px;
+    font-size: 24px;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.experience-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.experience-item:first-of-type{
+    display: block;
+    opacity: 1;
+}
+
+.experience-item p{
+    font-size: 18px;
+}
+
+.experience-item img{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.date {
+    font-size: 18px;
+    color: #00ffff;
+    margin-bottom: 20px;
+}
+
+.tech-icons span {
+    margin-right: 10px;
+    /* You can further style these tech icons or even use images */
+}
+
+
+.accomplishment {
+    margin-left: 20px;
+    list-style-type: none;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.accomplishment::before {
+    content: '↪';
+    font-size: 30px;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <style>
+        /* Adding the font styles here */
+        body {
+            font-family: 'PT Sans', sans-serif;
+        }
+
+        #header .header-text h1 {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #about h1, #experience-section h2, .experience-item h3 {
+            font-family: 'Michroma', sans-serif;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website - Sarim Khan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <div class="about-col1">
+            <img src="images/logo.png" class="logo">
+            </div>
+            <ul>
+
+                <h1><li><a href="https://files.catbox.moe/atkyjx.pdf" target="_blank">Resume</a></li></h1>
+
+            </ul>
+        </nav>
+        <div class="header-text">
+            <p>SOFTWARE ENGINEER</p>
+            <h1>Hi, I'm <span>Sarim</span><br>Developer from Toronto, Canada</h1>
+        </div>
+    </div>
+</div> 
+<!-----------about----------------->
+<div id="about">
+    <div class="container">
+        <div class="row">
+        <div class="about-col1">
+            <h1>GET TO KNOW ME</h1>
+            <p>
+                Hi, my name is Sarim Khan! I am a sophomore Computer Science student at the University of Western Ontario planning to minor in Software Engineering. <br><br>
+                I am passionate about Programming, Software Development, and Finance, and am interested in various positions from Machine Learing, Web Development and Frontend Engineering to Data Analysis.
+            </p>
+        </div>
+        <div class="about-col2">
+            <p>
+                In the summer of 2023, I was a Software Developer at Kevares, a small Brazillian-founded robotics services startup based in Oshawa, Ontario. <br><br>
+                <i><b>Currently, I am looking for opportunities for the Summer 2024 period!</b><br><br></i>
+                Outside of coding, I enjoy video-making, reading, and hitting the gym. If you're interested in the same hobbies, don't be shy to find me on my socials!
+
+            </p>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!----------Experience Section----------------->
+<div id="experience-section">
+    <div class="sidebar">
+        <a href="#exp1">Kevares</a>
+        <a href="#exp2">WAI</a>
+        <a href="#exp3">Western Algo</a>
+    </div>
+    <div class="experience-content container">
+        <h2> EXPERIENCE <br><br>  </h2>
+
+        <div class="experience-item" id="exp1">
+            <h3>Software Development Intern @ Kevares</h3>
+            <p class="date">MAY 2023 - AUGUST 2023</p>
+            <div class="tech-icons">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original-wordmark.svg" />
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" />
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" />
+            </div>
+            <ul>
+                <li class="accomplishment">Utilized the capabilities of Google Maps API to forge an interactive, real-time map displaying current data about the state of the streets, utilizing JavaScript for dynamic data handling.</li>
+                <li class="accomplishment">Collaborated with the Big Data analytics team to optimize the user interface and experience, aligning with strategic objectives for the impending 2023 seed funding round and subsequent expansion into the North American market.</li>
+                <li class="accomplishment"> Managed the ingestion and taxonomical structuring of over 11,000 Robotic Operating System (ROS)-based sidewalk scans within the Oshawa municipality, utilizing the Quasar framework and Vue.js for robust web development.</li>
+                <li class="accomplishment">Co-authored comprehensive documentation on Confluence, streamlining the knowledge-sharing process, resulting in reduction of over 10 hours of labor per month for project management personnel.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item" id="exp2">
+            <h3>Project Team Developer @ Western AI</h3>
+            <p class="date">MAY 2023 - AUGUST 2023</p>
+            <div class="tech-icons">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" />
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" />
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" />
+
+            </div>
+            <ul>
+                <li class="accomplishment">Constructed a convolutional neural network, aiming to scrutinize thyroid levels and identify tumors in extensive sets of MRI brain images.</li>
+                <li class="accomplishment">Utilized Jupyter Notebook within Google Colab in tandem to establish a uniform and efficient workflow, harnessing the power of Python for data manipulation and analysis.</li>
+                <li class="accomplishment"> Achieved a remarkable 91% accuracy rate across all analyzed scans, integrating and enhancing datasets previously available on Kaggle, and employing an array of technologies including TensorFlow and Keras for deep learning, Numpy and Pandas for numerical computations and data manipulation, and Scikit for additional scientific computing capabilities.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item" id="exp3">
+            <h3>Quantitative Analyst @ Western Algorithmic Trading Club</h3>
+            <p class="date">OCTOBER 2023 - Current</p>
+            <div class="tech-icons">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />
+            </div>
+            <ul>
+                <li class="accomplishment">Using Python with machine learning libraries to develop trading alogrithms.</li>
+                <li class="accomplishment">Researched premiums and discounts using NAV and market price on Sprott Uranium Trust positions.</li>
+                <li class="accomplishment">Utilized React and MongoDB for building interactive app to display analysis on investment strategies.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script src="experience.js"></script>
+    
+
+</body>
+</html>
