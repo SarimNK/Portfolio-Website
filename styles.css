@@ -95,7 +95,8 @@ nav ul li a:hover::after{
 
 .header-text h1{
     font-family:'Poppins', sans-serif;
-    font-size: 80px;
+    font-size: calc(4vw + 10px);
+    line-height: 1.2;
     margin-top: 20px;
 }
 .header-text p{
@@ -113,6 +114,12 @@ nav ul li a:hover::after{
     padding: 20px;
     font-size:  30px;
 }
+
+.section-break{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
 
 /* Experience Section */
 #experience-section {
@@ -224,9 +231,9 @@ nav ul li a:hover::after{
     }
 }
 
-@media (max-width: 1024px){
+@media (max-width: 1200px){
     .header-text h1{
-        font-size: 6vw;
+        font-size: calc(3.5vw+10px);
     }
 
     .sidebar{
@@ -234,11 +241,28 @@ nav ul li a:hover::after{
     }
 }
 
+@media (max-width: 992px){
+    .about-col1, .about-col2{
+        flex-basis: 100%;
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
 @media (max-width: 768px){
-    .sidebar,
-    .experience-content{
-        width: 100%;
-        margin-left: 0;
+    #header{
+        height: auto;
+        min-height: 50vh;
+    }
+    .header-text {
+        margin-top: 10%;
+        font-size: smaller;
+    }
+}
+
+@media (max-width: 576px){
+    .header-text h1{
+        font-size: calc(6vw + 10px);
     }
 }
 
