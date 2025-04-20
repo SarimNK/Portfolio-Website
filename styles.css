@@ -123,27 +123,17 @@ nav ul li a:hover::after{
 
 /* Experience Section */
 #experience-section {
-    padding-top: 50px;
-    border-top: 2px solid #333;
     display: flex;
+    align-items: flex-start;
 }
 
 .sidebar{
-    width: 200px;
-    position: sticky;
-    top: 0;
-    border-right: 1px solid #ababab;
-    padding: 10px 40px;
-    
-    white-space: nowrap;
+    flex: 0 0 200px;
 }
 
 
 .experience-content{
-    position: relative;
-    margin-left: 220px;
-    width: calc(100%-220px);
-    min-height: 600px;
+    flex: 1 1 auto;
 }
 
 .sidebar a{
@@ -161,12 +151,9 @@ nav ul li a:hover::after{
 }
 
 .experience-item {
-    display: none;
+    position: relative;
     margin-bottom: 40px;
-    font-size: 24px;
-    width: 100%;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    padding-left: 0;
 }
 
 .experience-item h3 {
@@ -183,11 +170,62 @@ nav ul li a:hover::after{
     font-size: 18px;
 }
 
-.experience-item img{
+.experience-item .tech-icons img {
     width: 50px;
     height: 50px;
     margin-right: 10px;
     border-radius: 5px;
+}
+
+.company-logo-container {
+    flex: 0 0 auto;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 210px;    /* Reduced from 300px by 30% */
+    max-height: 105px;   /* Reduced from 150px by 30% */
+}
+
+.company-logo {
+    width: auto;
+    height: auto;
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+/* Remove duplicate styles */
+.experience-flex {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.experience-content-right {
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+/* Keep hover effect */
+.company-logo:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.experience-content-right {
+    width: 100%;
+}
+
+/* Remove any old conflicting styles */
+.company-logo-section {
+    display: none;
+}
+
+.experience-flex {
+    width: 100%;
 }
 
 .date {
@@ -266,3 +304,45 @@ nav ul li a:hover::after{
     }
 }
 
+.experience-flex {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.company-logo-container {
+    flex: 0 0 120px;    
+    max-width: 120px; 
+    max-height: 80px;   
+    margin: 20px 10px;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .company-logo {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+
+
+
+.company-logo:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.experience-content-right {
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+/* Remove any old conflicting styles */
+.company-logo-section {
+    display: none;
+}
+  
