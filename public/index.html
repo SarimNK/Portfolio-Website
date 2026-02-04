@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sarim's Frutiger Aero Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600&family=Orbitron:wght@400;500;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#00eaff",
+              "primary-dark": "#008c99",
+              "background-light": "#e0f7fa", 
+              "background-dark": "#021019",
+              "glass-light": "rgba(255, 255, 255, 0.25)",
+              "glass-dark": "rgba(0, 0, 0, 0.4)",
+            },
+            fontFamily: {
+              display: ['"Orbitron"', 'sans-serif'],
+              body: ['"Exo 2"', 'sans-serif'],
+              urdu: ['"Noto Nastaliq Urdu"', 'serif'],
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              'xl': '1.5rem',
+              '2xl': '2rem',
+              '3xl': '3rem',
+            },
+            animation: {
+                'float': 'float 6s ease-in-out infinite',
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'typing': 'typing 3.5s steps(40, end), blink .75s step-end infinite',
+            },
+            keyframes: {
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-10px)' },
+                },
+                typing: {
+                    from: { width: '0' },
+                    to: { width: '100%' },
+                },
+                blink: {
+                    'from, to': { borderColor: 'transparent' },
+                    '50%': { borderColor: '#00eaff' },
+                }
+            },
+            backgroundImage: {
+                'underwater-gradient': 'linear-gradient(180deg, rgba(0,212,255,0.1) 0%, rgba(2,16,25,0.9) 100%)',
+            }
+          },
+        },
+      };
+    </script>
+<style>
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.05;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBIreitCPV5s7mAWkrN_T8O-YAyodlvcbigjH1GmMbj-EagsNJ7gjMwQdtmvy62e8_veIEM7JYLzKWLtHP1YCXt6DGZgqTxFgNtr9M6p7nUT0o0Uznd5Nc2V7ap7kpyZD9lxlXQZU25QlzG06UffyePPYdx5TD1rR3ZU-eh1-QdXvwxRlTGJXH4bkWI0ZfFnplE0SiefMc-7yBYUBfkuRFc2-fHrkAtPJMozRluG8LbFhjwwl5UF_Gqk6YLynhZ3cmQp5vbn6CYmA)
+}
+html {
+    scroll-behavior: smooth
+}
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent
+}
+.glass-panel {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)
+}
+.dark .glass-panel {
+    border: 1px solid rgba(255, 255, 255, 0.05)
+}
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+    animation: rise 10s infinite ease-in;
+    z-index: 0
+}
+@keyframes rise {
+    0% {
+        bottom: -100px;
+        transform: translateX(0);
+        opacity: 0;
+    } 
+    50% {
+        opacity: 1;
+    } 
+    100% {
+        bottom: 1080px;
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+}
+.cursor-blink {
+    animation: blink 1s step-end infinite
+}
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+.window-btn {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.window-btn:hover {
+    transform: scale(1.2);
+}
+.window-btn.close:hover {
+    background-color: #ef4444;
+}
+.window-btn.minimize:hover {
+    background-color: #eab308;
+}
+.window-btn.fullscreen:hover {
+    background-color: #22c55e;
+}
+#main-window {
+    transform-origin: center bottom;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.3s ease,
+                width 0.3s ease,
+                height 0.3s ease,
+                max-width 0.3s ease,
+                border-radius 0.3s ease,
+                inset 0.3s ease;
+}
+#main-window.minimized {
+    transform: scale(0.05) translateY(calc(100vh - 100px));
+    opacity: 0;
+    pointer-events: none;
+}
+#main-window.fullscreen {
+    position: fixed;
+    inset: 0;
+    max-width: none;
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0;
+    margin: 0;
+    z-index: 100;
+    overflow-y: auto;
+}
+/* Resize handles */
+.resize-handle {
+    position: absolute;
+    z-index: 10;
+}
+.resize-handle-n { top: -4px; left: 10px; right: 10px; height: 8px; cursor: n-resize; }
+.resize-handle-s { bottom: -4px; left: 10px; right: 10px; height: 8px; cursor: s-resize; }
+.resize-handle-e { right: -4px; top: 10px; bottom: 10px; width: 8px; cursor: e-resize; }
+.resize-handle-w { left: -4px; top: 10px; bottom: 10px; width: 8px; cursor: w-resize; }
+.resize-handle-ne { top: -4px; right: -4px; width: 16px; height: 16px; cursor: ne-resize; }
+.resize-handle-nw { top: -4px; left: -4px; width: 16px; height: 16px; cursor: nw-resize; }
+.resize-handle-se { bottom: -4px; right: -4px; width: 16px; height: 16px; cursor: se-resize; }
+.resize-handle-sw { bottom: -4px; left: -4px; width: 16px; height: 16px; cursor: sw-resize; }
+/* Corner handles get a subtle visual indicator */
+.resize-handle-se::after,
+.resize-handle-sw::after,
+.resize-handle-ne::after,
+.resize-handle-nw::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: rgba(0, 234, 255, 0);
+    transition: background 0.2s;
+}
+.resize-handle-se::after { bottom: 2px; right: 2px; }
+.resize-handle-sw::after { bottom: 2px; left: 2px; }
+.resize-handle-ne::after { top: 2px; right: 2px; }
+.resize-handle-nw::after { top: 2px; left: 2px; }
+.resize-handle:hover::after {
+    background: rgba(0, 234, 255, 0.5);
+}
+#main-window.fullscreen .resize-handle,
+#main-window.minimized .resize-handle {
+    display: none;
+}
+/* Taskbar bounce animations */
+#taskbar.scale-110 {
+    transform: translateX(-50%) scale(1.1);
+}
+#taskbar.scale-90 {
+    transform: translateX(-50%) scale(0.9);
+}
+/* RTL Support */
+[dir="rtl"] .list-disc {
+    list-style-position: inside;
+}
+[dir="rtl"] #content-area {
+    text-align: right;
+}
+[dir="rtl"] .flex-wrap {
+    justify-content: flex-end;
+}
+[dir="rtl"] .mr-2 {
+    margin-right: 0;
+    margin-left: 0.5rem;
+}
+[dir="rtl"] .mr-1 {
+    margin-right: 0;
+    margin-left: 0.25rem;
+}
+[dir="rtl"] .pl-1 {
+    padding-left: 0;
+    padding-right: 0.25rem;
+}
+/* Urdu mode - smaller text to fit */
+[dir="rtl"] #content-area {
+    font-size: 1rem;
+    line-height: 1.75;
+}
+[dir="rtl"] h1 {
+    font-size: 2.5rem !important;
+}
+@media (min-width: 640px) {
+    [dir="rtl"] h1 {
+        font-size: 3rem !important;
+    }
+}
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 min-h-screen relative overflow-x-hidden font-body transition-colors duration-500">
+<div class="noise-overlay"></div>
+<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute inset-0 bg-gradient-to-br from-cyan-200/40 via-blue-200/20 to-transparent dark:from-cyan-900/20 dark:via-blue-900/40 dark:to-black"></div>
+<div class="absolute top-[-20%] left-[20%] w-[600px] h-[1000px] bg-gradient-to-b from-primary/20 to-transparent rotate-[30deg] blur-3xl opacity-60 dark:opacity-30"></div>
+<div class="absolute top-[-10%] right-[10%] w-[400px] h-[800px] bg-gradient-to-b from-blue-400/20 to-transparent rotate-[-15deg] blur-3xl opacity-50 dark:opacity-20"></div>
+<div class="bubble w-16 h-16 left-[10%] delay-0 duration-[8s]"></div>
+<div class="bubble w-8 h-8 left-[25%] delay-[2s] duration-[12s]"></div>
+<div class="bubble w-12 h-12 left-[40%] delay-[5s] duration-[10s]"></div>
+<div class="bubble w-20 h-20 left-[75%] delay-[1s] duration-[15s]"></div>
+<div class="bubble w-6 h-6 left-[90%] delay-[3s] duration-[9s]"></div>
+<div class="absolute bottom-0 w-full h-48 opacity-10 dark:opacity-30 bg-repeat-x" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAGAM5H1_snfaxBHJmFY-OrlvxZVhhz9gQZBRsWh6AyOv-g3pMGxfoAElWSUvagh04WjfxL60o12zicY4BVCafhjQNx9o_BJZVu3dws_NltGG1TX8ka-PwPMUPZMFMu23WmE5ex0velq0PdoqXOkTaTVNDOCybIPOBobtSziKrWXiC1W1RPIqvNtJSV3xw0eJzi5qKMagSK3eZqWQKPk0_loDK9O60wlUj9u46uWSNKQSJAEKvsvhkk9cYNWJBmicIVAQeGcP7fuA'); mask-image: linear-gradient(to top, black, transparent); -webkit-mask-image: linear-gradient(to top, black, transparent);">
+<div class="w-full h-full bg-slate-900" style="clip-path: polygon(0% 100%, 5% 80%, 10% 90%, 15% 70%, 20% 85%, 25% 60%, 30% 80%, 35% 50%, 40% 75%, 45% 60%, 50% 90%, 55% 65%, 60% 80%, 65% 55%, 70% 85%, 75% 60%, 80% 90%, 85% 70%, 90% 80%, 95% 65%, 100% 100%);"></div>
+</div>
+</div>
+<main class="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 sm:p-12 pb-32">
+<div id="main-window" class="w-full max-w-4xl glass-panel bg-glass-light dark:bg-glass-dark rounded-3xl p-6 sm:p-12 shadow-2xl animate-float backdrop-blur-xl border border-white/40 dark:border-white/10 ring-1 ring-white/20 dark:ring-white/5 relative">
+<!-- Resize handles -->
+<div class="resize-handle resize-handle-n"></div>
+<div class="resize-handle resize-handle-s"></div>
+<div class="resize-handle resize-handle-e"></div>
+<div class="resize-handle resize-handle-w"></div>
+<div class="resize-handle resize-handle-ne"></div>
+<div class="resize-handle resize-handle-nw"></div>
+<div class="resize-handle resize-handle-se"></div>
+<div class="resize-handle resize-handle-sw"></div>
+<div class="flex justify-between items-start mb-8">
+<div class="flex gap-2">
+<div class="window-btn close w-3 h-3 rounded-full bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.8)]" onclick="closeWindow()" title="Close"></div>
+<div class="window-btn minimize w-3 h-3 rounded-full bg-yellow-400 shadow-[0_0_8px_rgba(250,204,21,0.8)]" onclick="minimizeWindow()" title="Minimize"></div>
+<div class="window-btn fullscreen w-3 h-3 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.8)]" onclick="toggleFullscreen()" title="Fullscreen"></div>
+</div>
+<div id="lang-toggle" class="relative inline-flex items-center cursor-pointer glass-panel bg-white/20 dark:bg-black/30 rounded-full p-1 border border-white/20 h-8 w-20" onclick="toggleLanguage()">
+<span class="absolute left-2 text-[10px] font-display font-bold text-primary dark:text-white">EN</span>
+<span class="absolute right-2 text-[10px] text-gray-500 dark:text-gray-400">اردو</span>
+<div id="lang-slider" class="w-6 h-6 bg-gradient-to-b from-white to-gray-200 rounded-full shadow-md transform translate-x-0 transition-transform duration-300"></div>
+</div>
+</div>
+<div class="mb-8">
+<h1 class="font-display text-3xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-300 dark:to-blue-400 drop-shadow-sm tracking-tighter mb-2">
+                    <span id="typing-text"></span><span class="text-primary cursor-blink">_</span>
+</h1>
+<p class="text-sm font-display text-primary uppercase tracking-widest opacity-80" data-en="Computer Science Student" data-ur="کمپیوٹر سائنس کا طالب علم">Computer Science Student</p>
+</div>
+<div id="content-area" class="space-y-8 font-body text-base sm:text-lg leading-relaxed">
+<div class="group">
+<p class="text-gray-700 dark:text-gray-300 mb-2" data-en="currently;" data-ur="فی الحال؛">currently;</p>
+<ul class="content-list list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
+<li class="pl-1">
+<span data-en="studying cs at" data-ur="سی ایس پڑھ رہا ہوں">studying cs at</span> 
+<a class="inline-flex items-center px-2 py-1 mx-1 rounded-lg bg-[#4F2683]/20 dark:bg-[#4F2683]/40 text-[#4F2683] dark:text-purple-300 hover:bg-[#4F2683]/30 dark:hover:bg-[#4F2683]/50 transition-all border border-[#4F2683]/30 dark:border-[#4F2683]/50 align-middle" href="https://www.uwo.ca" target="_blank">
+<img src="./images/logos/western.png" alt="Western" class="w-4 h-4 mr-1 object-contain"> Western
+</a>
+<span data-en="university" data-ur="یونیورسٹی">university</span>
+</li>
+<li class="pl-1">
+<span data-en="building at" data-ur="کام کر رہا ہوں">building at</span> 
+<a class="inline-flex items-center px-2 py-1 mx-1 rounded-lg overflow-hidden hover:scale-105 transition-all border border-orange-400/50 dark:border-orange-700/50 align-middle" href="https://www.tangerine.ca" target="_blank" style="background: linear-gradient(90deg, rgba(243,114,33,0.3) 50%, rgba(236,28,36,0.3) 50%);">
+<img src="./images/logos/tangerine.png" alt="Tangerine" class="w-4 h-4 mr-1 object-contain rounded"><span class="text-[#F37221] dark:text-orange-300 pr-1">Tangerine</span><img src="./images/logos/scotiabank.png" alt="Scotiabank" class="w-4 h-4 mx-1 object-contain"><span class="text-[#EC1C24] dark:text-red-300 pl-1">Scotiabank</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="group">
+<p class="text-gray-700 dark:text-gray-300 mb-2" data-en="previously built at:" data-ur="پہلے کام کیا:">previously built at:</p>
+<ul class="content-list list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
+<li class="pl-1">
+<a class="inline-flex items-center px-2 py-1 mx-1 rounded-lg bg-[#00B388]/20 dark:bg-[#00B388]/30 text-[#00B388] dark:text-emerald-300 hover:scale-105 transition-all border border-[#00B388]/30 dark:border-[#00B388]/50 align-middle" href="https://www.hp.com" target="_blank">
+<img src="./images/logos/hp.png" alt="HP" class="w-4 h-4 mr-1 object-contain"> HP
+</a>
+</li>
+<li class="pl-1">
+<a class="inline-flex items-center px-2 py-1 mx-1 rounded-lg bg-[#1B5E7D]/20 dark:bg-[#1B5E7D]/30 text-[#1B5E7D] dark:text-cyan-300 hover:scale-105 transition-all border border-[#1B5E7D]/30 dark:border-[#1B5E7D]/50 align-middle" href="https://www.kongsberggeospatial.com" target="_blank">
+<img src="./images/logos/kongsberg.png" alt="Kongsberg" class="w-4 h-4 mr-1 object-contain"> Kongsberg
+</a>
+</li>
+<li class="pl-1">
+<a class="inline-flex items-center px-2 py-1 mx-1 rounded-lg bg-[#1B365D]/20 dark:bg-[#1B365D]/30 text-[#1B365D] dark:text-blue-300 hover:scale-105 transition-all border border-[#1B365D]/30 dark:border-[#1B365D]/50 align-middle" href="https://www.intrado.com" target="_blank">
+<img src="./images/logos/intrado.png" alt="Intrado" class="w-4 h-4 mr-1 object-contain"> Intrado
+</a>
+</li>
+<li class="pl-1">
+<a class="inline-flex items-center px-2 py-1 mx-1 rounded-lg bg-[#F37920]/20 dark:bg-[#F37920]/30 text-[#F37920] dark:text-orange-300 hover:scale-105 transition-all border border-[#F37920]/30 dark:border-[#F37920]/50 align-middle" href="https://kevares.com" target="_blank">
+<img src="./images/logos/kevares.png" alt="Kevares" class="w-4 h-4 mr-1 object-contain rounded"> Kevares
+</a>
+</li>
+</ul>
+</div>
+<div class="group">
+<p class="text-gray-700 dark:text-gray-300" data-en="building:" data-ur="بنا رہا ہوں:">building:</p>
+<ul class="content-list list-disc pl-5 mt-2 space-y-1 text-gray-700 dark:text-gray-300">
+<li><a class="hover:text-primary transition-colors font-medium" href="https://v0-scotia-swipe-subscription-app.vercel.app" target="_blank" data-en="ScotiaSwipe - tinder for subscriptions" data-ur="ScotiaSwipe - سبسکرپشنز کے لیے ٹنڈر">tinder for subscriptions</a></li>
+<li><a class="hover:text-primary transition-colors font-medium" href="https://devpost.com/software/tinderdb" target="_blank" data-en="TinderDB - tinder for databases (no pattern here pls)" data-ur="TinderDB - ڈیٹا بیس کے لیے ٹنڈر">tinder for databases (there's no pattern here i promise)</a></li>
+<li><a class="hover:text-primary transition-colors font-medium" href="https://v0-clout-print-ui-build.vercel.app" target="_blank" data-en="CloutPrint - cluely merch maker" data-ur="CloutPrint - مرچ بنانے والا">cluely merch maker</a></li>
+<li><a class="hover:text-primary transition-colors font-medium" href="http://bell-ai-slide-gen.netlify.app" target="_blank" data-en="Bell AI Slide Generator - AI powered slides" data-ur="Bell AI - پریزنٹیشن بنانے والا">AI powered slides</a></li>
+</ul>
+</div>
+<div class="pt-6 border-t border-gray-200 dark:border-gray-700/50">
+<p class="text-gray-600 dark:text-gray-400 text-base mb-4 font-display uppercase tracking-widest text-xs" data-en="Connect" data-ur="رابطہ">Connect</p>
+<div class="flex flex-wrap gap-3">
+<a class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/40 dark:bg-black/40 hover:bg-white/60 dark:hover:bg-black/60 border border-white/40 dark:border-white/10 transition-all backdrop-blur-sm" href="mailto:sarimkhan.1k@gmail.com">
+<i class="far fa-envelope text-gray-600 dark:text-gray-300 group-hover:text-red-500 transition-colors"></i>
+<span class="text-sm font-medium" data-en="Email" data-ur="ای میل">Email</span>
+</a>
+<a class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/40 dark:bg-black/40 hover:bg-white/60 dark:hover:bg-black/60 border border-white/40 dark:border-white/10 transition-all backdrop-blur-sm" href="https://www.linkedin.com/in/sarim-khan-14297b249" target="_blank">
+<i class="fab fa-linkedin-in text-gray-600 dark:text-gray-300 group-hover:text-blue-500 transition-colors"></i>
+<span class="text-sm font-medium">LinkedIn</span>
+</a>
+<a class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/40 dark:bg-black/40 hover:bg-white/60 dark:hover:bg-black/60 border border-white/40 dark:border-white/10 transition-all backdrop-blur-sm" href="https://github.com/SarimNK" target="_blank">
+<i class="fab fa-github text-gray-600 dark:text-gray-300 group-hover:text-purple-500 transition-colors"></i>
+<span class="text-sm font-medium">GitHub</span>
+</a>
+<a class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/40 dark:bg-black/40 hover:bg-white/60 dark:hover:bg-black/60 border border-white/40 dark:border-white/10 transition-all backdrop-blur-sm" href="https://x.com/sarimnkhan" target="_blank">
+<i class="fa-brands fa-x-twitter text-gray-600 dark:text-gray-300 group-hover:text-blue-400 transition-colors"></i>
+<span class="text-sm font-medium" data-en="46 Followers" data-ur="۴۶ فالوورز">46 Followers</span>
+</a>
+<a class="group flex items-center gap-2 px-3 py-2 rounded-xl bg-white/40 dark:bg-black/40 hover:bg-white/60 dark:hover:bg-black/60 border border-white/40 dark:border-white/10 transition-all backdrop-blur-sm" href="https://substack.com/@sarim" target="_blank">
+<i class="fas fa-newspaper text-gray-600 dark:text-gray-300 group-hover:text-orange-500 transition-colors"></i>
+<span class="text-sm font-medium">Substack</span>
+</a>
+</div>
+</div>
+</div>
+<div id="search-hint" class="absolute bottom-4 right-4 rtl:right-auto rtl:left-4 text-xs text-gray-400 dark:text-gray-500 font-mono hidden sm:block opacity-60">
+<span data-en="press" data-ur="دبائیں">press</span> <span class="border border-gray-400 dark:border-gray-600 px-1.5 py-0.5 rounded text-[10px] mx-1">/</span> <span data-en="to search" data-ur="تلاش کریں">to search</span>
+</div>
+</div>
+<div class="absolute top-[20%] right-[5%] z-0 hidden lg:block animate-float" style="animation-delay: 1s;">
+<div class="w-32 h-32 rounded-full bg-gradient-to-br from-white/10 to-transparent border border-white/20 backdrop-blur-sm shadow-[0_0_30px_rgba(0,234,255,0.2)]"></div>
+<div class="absolute inset-2 rounded-full border border-white/10"></div>
+</div>
+<div class="absolute bottom-[20%] left-[5%] z-0 hidden lg:block animate-float" style="animation-delay: 3s;">
+<div class="w-24 h-24 rounded-full bg-gradient-to-tl from-cyan-400/10 to-transparent border border-white/10 backdrop-blur-sm shadow-[0_0_30px_rgba(0,140,153,0.2)]"></div>
+</div>
+</main>
+
+<!-- Taskbar - Square Icon -->
+<div id="taskbar" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-transform duration-200">
+<div class="flex items-center justify-center p-2 rounded-xl glass-panel bg-glass-light/30 dark:bg-glass-dark/30 backdrop-blur-xl border border-white/30 shadow-2xl cursor-pointer" onclick="restoreWindow()">
+<div class="w-12 h-12 flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-400 to-cyan-500 text-white shadow-lg border-2 border-white/50 hover:scale-110 transition-transform duration-200 ease-out">
+<i class="far fa-window-maximize text-xl"></i>
+</div>
+</div>
+</div>
+
+<script>
+        // Check local storage or system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Typing animation
+        let currentTypingText = "hey, i'm sarim";
+        const typingElement = document.getElementById('typing-text');
+        const typeSpeed = 100;
+        const deleteSpeed = 50;
+        const pauseAfterType = 3000;
+        const pauseAfterDelete = 500;
+
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeLoop() {
+            if (!isDeleting) {
+                if (charIndex < currentTypingText.length) {
+                    typingElement.textContent = currentTypingText.substring(0, charIndex + 1);
+                    charIndex++;
+                    setTimeout(typeLoop, typeSpeed);
+                } else {
+                    isDeleting = true;
+                    setTimeout(typeLoop, pauseAfterType);
+                }
+            } else {
+                if (charIndex > 0) {
+                    typingElement.textContent = currentTypingText.substring(0, charIndex - 1);
+                    charIndex--;
+                    setTimeout(typeLoop, deleteSpeed);
+                } else {
+                    isDeleting = false;
+                    setTimeout(typeLoop, pauseAfterDelete);
+                }
+            }
+        }
+
+        typeLoop();
+
+        // Language toggle with RTL support
+        let currentLang = 'en';
+        const typingTexts = {
+            en: "hey, i'm sarim",
+            ur: "ہیلو، میں سارم ہوں"
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ur' : 'en';
+            const slider = document.getElementById('lang-slider');
+            const headerBar = document.querySelector('.flex.justify-between.items-start.mb-8');
+            
+            if (currentLang === 'ur') {
+                slider.style.transform = 'translateX(48px)';
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ur');
+                document.body.style.fontFamily = '"Noto Nastaliq Urdu", serif';
+                if (headerBar) {
+                    headerBar.style.direction = 'ltr';
+                }
+                document.querySelectorAll('.content-list').forEach(list => {
+                    list.classList.remove('pl-5');
+                    list.classList.add('pr-5');
+                });
+            } else {
+                slider.style.transform = 'translateX(0)';
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+                document.body.style.fontFamily = '"Exo 2", sans-serif';
+                if (headerBar) {
+                    headerBar.style.direction = 'ltr';
+                }
+                document.querySelectorAll('.content-list').forEach(list => {
+                    list.classList.remove('pr-5');
+                    list.classList.add('pl-5');
+                });
+            }
+
+            currentTypingText = typingTexts[currentLang];
+            charIndex = 0;
+            isDeleting = false;
+            typingElement.textContent = '';
+
+            document.querySelectorAll('[data-en][data-ur]').forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+        }
+
+        // Window control functions (macOS style)
+        const mainWindow = document.getElementById('main-window');
+        const taskbar = document.getElementById('taskbar');
+        
+        function closeWindow() {
+            // Animate to taskbar position
+            mainWindow.classList.add('minimized');
+            taskbar.classList.add('scale-110');
+            setTimeout(() => taskbar.classList.remove('scale-110'), 400);
+        }
+
+        function minimizeWindow() {
+            // Same as close - minimize to dock
+            mainWindow.classList.add('minimized');
+            taskbar.classList.add('scale-110');
+            setTimeout(() => taskbar.classList.remove('scale-110'), 400);
+        }
+
+        function toggleFullscreen() {
+            if (mainWindow.classList.contains('minimized')) {
+                restoreWindow();
+            }
+            mainWindow.classList.toggle('fullscreen');
+            // Reset custom size when going fullscreen
+            if (mainWindow.classList.contains('fullscreen')) {
+                mainWindow.style.width = '';
+                mainWindow.style.height = '';
+            }
+        }
+
+        function restoreWindow() {
+            mainWindow.classList.remove('minimized');
+            // Bounce effect on taskbar
+            taskbar.classList.add('scale-90');
+            setTimeout(() => taskbar.classList.remove('scale-90'), 100);
+        }
+
+        // Resize functionality
+        let isResizing = false;
+        let currentHandle = null;
+        let startX, startY, startWidth, startHeight, startLeft, startTop;
+
+        document.querySelectorAll('.resize-handle').forEach(handle => {
+            handle.addEventListener('mousedown', initResize);
+        });
+
+        function initResize(e) {
+            if (mainWindow.classList.contains('fullscreen')) return;
+            
+            isResizing = true;
+            currentHandle = e.target.className.split(' ')[1]; // e.g., 'resize-handle-se'
+            
+            startX = e.clientX;
+            startY = e.clientY;
+            
+            const rect = mainWindow.getBoundingClientRect();
+            startWidth = rect.width;
+            startHeight = rect.height;
+            startLeft = rect.left;
+            startTop = rect.top;
+            
+            // Disable animation during resize
+            mainWindow.style.animation = 'none';
+            mainWindow.style.transition = 'none';
+            
+            document.addEventListener('mousemove', resize);
+            document.addEventListener('mouseup', stopResize);
+            e.preventDefault();
+        }
+
+        function resize(e) {
+            if (!isResizing) return;
+            
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            
+            let newWidth = startWidth;
+            let newHeight = startHeight;
+            
+            // Calculate new dimensions based on handle
+            if (currentHandle.includes('-e') || currentHandle.includes('-ne') || currentHandle.includes('-se')) {
+                newWidth = Math.max(400, startWidth + dx);
+            }
+            if (currentHandle.includes('-w') || currentHandle.includes('-nw') || currentHandle.includes('-sw')) {
+                newWidth = Math.max(400, startWidth - dx);
+            }
+            if (currentHandle.includes('-s') || currentHandle.includes('-se') || currentHandle.includes('-sw')) {
+                newHeight = Math.max(300, startHeight + dy);
+            }
+            if (currentHandle.includes('-n') || currentHandle.includes('-ne') || currentHandle.includes('-nw')) {
+                newHeight = Math.max(300, startHeight - dy);
+            }
+            
+            mainWindow.style.width = newWidth + 'px';
+            mainWindow.style.height = newHeight + 'px';
+            mainWindow.style.maxWidth = newWidth + 'px';
+            mainWindow.style.overflow = 'auto';
+        }
+
+        function stopResize() {
+            isResizing = false;
+            currentHandle = null;
+            
+            // Re-enable animation
+            mainWindow.style.animation = '';
+            mainWindow.style.transition = '';
+            
+            document.removeEventListener('mousemove', resize);
+            document.removeEventListener('mouseup', stopResize);
+        }
+
+        // Search bar on '/' key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/') {
+                e.preventDefault();
+                const searchBar = document.createElement('div');
+                searchBar.className = 'fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm';
+                searchBar.id = 'search-modal';
+                searchBar.innerHTML = `
+                    <div class="w-full max-w-lg bg-white/90 dark:bg-slate-900 border border-white/20 dark:border-slate-700 rounded-2xl p-4 shadow-2xl transform transition-all scale-100">
+                        <div class="flex items-center gap-3 border-b border-gray-200 dark:border-gray-700 pb-2 mb-2">
+                             <i class="fas fa-search text-gray-400"></i>
+                             <input type="text" placeholder="Search..." class="bg-transparent border-none outline-none w-full text-lg text-slate-800 dark:text-white placeholder-gray-400 focus:ring-0" id="search-input">
+                             <button class="text-xs text-gray-400 border border-gray-600 px-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800" onclick="closeSearch()">ESC</button>
+                        </div>
+                        <div class="text-xs text-gray-500 pt-2 px-1">
+                            Navigation > Home
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(searchBar);
+                document.getElementById('search-input').focus();
+                searchBar.addEventListener('click', (e) => { if(e.target === searchBar) closeSearch() });
+            }
+            if (e.key === 'Escape') {
+                closeSearch();
+            }
+        });
+
+        function closeSearch() {
+            const modal = document.getElementById('search-modal');
+            if (modal) modal.remove();
+        }
+    </script>
+</body></html>
